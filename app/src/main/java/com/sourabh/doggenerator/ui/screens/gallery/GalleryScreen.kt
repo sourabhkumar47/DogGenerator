@@ -18,7 +18,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.sourabh.doggenerator.ui.viewmodel.DogViewModel
@@ -26,7 +26,7 @@ import com.sourabh.doggenerator.ui.viewmodel.DogViewModel
 @Composable
 fun GalleryScreen(
     navController: NavController,
-    viewModel: DogViewModel = viewModel()
+    viewModel: DogViewModel = hiltViewModel()
 ) {
     val savedDogs by viewModel.savedDogs.collectAsState(initial = emptyList())
 
@@ -35,7 +35,6 @@ fun GalleryScreen(
             .fillMaxSize()
             .padding(16.dp)
     ) {
-
         LazyRow(
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             modifier = Modifier
@@ -43,9 +42,9 @@ fun GalleryScreen(
                 .fillMaxWidth()
                 .height(300.dp)
         ) {
-            items(savedDogs) { dogUrl ->
+            items(savedDogs) { dogImage ->
                 AsyncImage(
-                    model = dogUrl,
+                    model = dogImage.url,
                     contentDescription = "Saved Dog",
                     modifier = Modifier
                         .aspectRatio(1f)

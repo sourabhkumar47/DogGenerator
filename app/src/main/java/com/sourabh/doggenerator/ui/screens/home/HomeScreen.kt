@@ -28,7 +28,7 @@ fun HomeScreen(navController: NavController) {
         verticalArrangement = Arrangement.Center
     ) {
 
-        Text("Random Dog Generator!", color = Color.White, fontSize = 20.sp)
+        Text("Random Dog Generator!", fontSize = 20.sp)
 
         Spacer(modifier = Modifier.height(65.dp))
 

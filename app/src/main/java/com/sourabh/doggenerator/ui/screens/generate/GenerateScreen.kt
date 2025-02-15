@@ -20,19 +20,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.sourabh.doggenerator.ui.viewmodel.DogUiState
 import com.sourabh.doggenerator.ui.viewmodel.DogViewModel
 
 @Composable
 fun GenerateScreen(
     navController: NavController,
-    viewModel: DogViewModel = viewModel()
+    viewModel: DogViewModel = hiltViewModel()
 ) {
-    val currentDog by viewModel.currentDogImage.collectAsState()
-    val isLoading by viewModel.isLoading.collectAsState()
-    val error by viewModel.error.collectAsState()
+    val uiState by viewModel.uiState.collectAsState()
 
     Column(
         modifier = Modifier
@@ -41,14 +40,13 @@ fun GenerateScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .size(300.dp)
         ) {
-            when {
-                isLoading -> {
+            when (uiState) {
+                is DogUiState.Loading -> {
                     CircularProgressIndicator(
                         modifier = Modifier
                             .size(48.dp)
@@ -57,19 +55,27 @@ fun GenerateScreen(
                         strokeWidth = 4.dp
                     )
                 }
-
-                error != null -> Text(
-                    text = error ?: "An error occurred",
-                    color = MaterialTheme.colorScheme.error,
-                    modifier = Modifier.align(Alignment.Center)
-                )
-
-                currentDog != null -> AsyncImage(
-                    model = currentDog,
-                    contentDescription = "Generated Dog",
-                    modifier = Modifier.fillMaxSize(),
-                    contentScale = ContentScale.Fit
-                )
+                is DogUiState.Error -> {
+                    Text(
+                        text = (uiState as DogUiState.Error).message,
+                        color = MaterialTheme.colorScheme.error,
+                        modifier = Modifier.align(Alignment.Center)
+                    )
+                }
+                is DogUiState.Success -> {
+                    AsyncImage(
+                        model = (uiState as DogUiState.Success).dogImage.url,
+                        contentDescription = "Generated Dog",
+                        modifier = Modifier.fillMaxSize(),
+                        contentScale = ContentScale.Fit
+                    )
+                }
+                DogUiState.Initial -> {
+                    Text(
+                        text = "Click Generate to fetch a dog image!",
+                        modifier = Modifier.align(Alignment.Center)
+                    )
+                }
             }
         }
 
