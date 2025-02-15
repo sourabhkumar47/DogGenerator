@@ -1,8 +1,8 @@
 package com.sourabh.doggenerator.di
 
 import android.content.Context
-import com.sourabh.doggenerator.data.DogApiService
-import com.sourabh.doggenerator.data.DogCacheManager
+import com.sourabh.doggenerator.data.local.DogCacheManager
+import com.sourabh.doggenerator.data.remote.api.DogApiService
 import com.sourabh.doggenerator.data.repository.DogRepositoryImpl
 import com.sourabh.doggenerator.domain.repository.DogRepository
 import dagger.Module
