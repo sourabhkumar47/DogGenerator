@@ -1,5 +1,6 @@
 package com.sourabh.doggenerator.data.repository
 
+import com.sourabh.doggenerator.data.local.DogCacheManager
 import com.sourabh.doggenerator.data.remote.api.DogApiService
 import com.sourabh.doggenerator.domain.model.DogImage
 import com.sourabh.doggenerator.domain.repository.DogRepository
@@ -9,7 +10,7 @@ import javax.inject.Inject
 
 class DogRepositoryImpl @Inject constructor(
     private val api: DogApiService,
-    private val cacheManager: com.sourabh.doggenerator.data.local.DogCacheManager
+    private val cacheManager: DogCacheManager
 ) : DogRepository {
 
     override suspend fun getRandomDog(): Result<DogImage> {

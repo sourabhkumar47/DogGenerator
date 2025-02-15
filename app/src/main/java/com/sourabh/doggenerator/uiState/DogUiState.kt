@@ -1,4 +1,4 @@
-package com.sourabh.doggenerator.presentation.viewmodel
+package com.sourabh.doggenerator.uiState
 
 import com.sourabh.doggenerator.domain.model.DogImage
 

@@ -19,13 +19,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.sourabh.doggenerator.ui.viewmodel.DogViewModel
 
 @Composable
 fun GalleryScreen(
-    navController: NavController,
     viewModel: DogViewModel = hiltViewModel()
 ) {
     val savedDogs by viewModel.savedDogs.collectAsState(initial = emptyList())

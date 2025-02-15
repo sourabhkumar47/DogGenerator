@@ -16,7 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.sourabh.doggenerator.ui.navigation.Screen
+import com.sourabh.doggenerator.ui.navigation.Screens
 
 @Composable
 fun HomeScreen(navController: NavController) {
@@ -33,7 +33,7 @@ fun HomeScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(65.dp))
 
         Button(
-            onClick = { navController.navigate(Screen.Generate.route) },
+            onClick = { navController.navigate(Screens.Generate.route) },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(56.dp)
@@ -44,7 +44,7 @@ fun HomeScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(
-            onClick = { navController.navigate(Screen.Gallery.route) },
+            onClick = { navController.navigate(Screens.Gallery.route) },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(56.dp)

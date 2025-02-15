@@ -8,25 +8,19 @@ import com.sourabh.doggenerator.ui.screens.gallery.GalleryScreen
 import com.sourabh.doggenerator.ui.screens.generate.GenerateScreen
 import com.sourabh.doggenerator.ui.screens.home.HomeScreen
 
-sealed class Screen(val route: String) {
-    data object Home : Screen("home")
-    data object Generate : Screen("generate")
-    data object Gallery : Screen("gallery")
-}
-
 @Composable
 fun DogGeneratorNavigation() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = Screen.Home.route) {
-        composable(Screen.Home.route) {
+    NavHost(navController = navController, startDestination = Screens.Home.route) {
+        composable(Screens.Home.route) {
             HomeScreen(navController = navController)
         }
-        composable(Screen.Generate.route) {
-            GenerateScreen(navController = navController)
+        composable(Screens.Generate.route) {
+            GenerateScreen()
         }
-        composable(Screen.Gallery.route) {
-            GalleryScreen(navController = navController)
+        composable(Screens.Gallery.route) {
+            GalleryScreen()
         }
     }
 } 

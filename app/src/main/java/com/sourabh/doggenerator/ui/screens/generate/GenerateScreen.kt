@@ -21,14 +21,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.sourabh.doggenerator.ui.viewmodel.DogUiState
 import com.sourabh.doggenerator.ui.viewmodel.DogViewModel
+import com.sourabh.doggenerator.uiState.DogUiState
 
 @Composable
 fun GenerateScreen(
-    navController: NavController,
     viewModel: DogViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -55,6 +53,7 @@ fun GenerateScreen(
                         strokeWidth = 4.dp
                     )
                 }
+
                 is DogUiState.Error -> {
                     Text(
                         text = (uiState as DogUiState.Error).message,
@@ -62,6 +61,7 @@ fun GenerateScreen(
                         modifier = Modifier.align(Alignment.Center)
                     )
                 }
+
                 is DogUiState.Success -> {
                     AsyncImage(
                         model = (uiState as DogUiState.Success).dogImage.url,
@@ -70,6 +70,7 @@ fun GenerateScreen(
                         contentScale = ContentScale.Fit
                     )
                 }
+
                 DogUiState.Initial -> {
                     Text(
                         text = "Click Generate to fetch a dog image!",

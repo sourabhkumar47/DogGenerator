@@ -2,10 +2,10 @@ package com.sourabh.doggenerator.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sourabh.doggenerator.domain.model.DogImage
 import com.sourabh.doggenerator.domain.repository.DogRepository
 import com.sourabh.doggenerator.domain.usecase.GetRandomDogUseCase
 import com.sourabh.doggenerator.domain.usecase.GetSavedDogsUseCase
+import com.sourabh.doggenerator.uiState.DogUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -17,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class DogViewModel @Inject constructor(
     private val getRandomDogUseCase: GetRandomDogUseCase,
-    private val getSavedDogsUseCase: GetSavedDogsUseCase,
+    getSavedDogsUseCase: GetSavedDogsUseCase,
     private val repository: DogRepository
 ) : ViewModel() {
 
@@ -52,10 +52,3 @@ class DogViewModel @Inject constructor(
         }
     }
 }
-
-sealed class DogUiState {
-    data object Initial : DogUiState()
-    data object Loading : DogUiState()
-    data class Success(val dogImage: DogImage) : DogUiState()
-    data class Error(val message: String) : DogUiState()
-} 
